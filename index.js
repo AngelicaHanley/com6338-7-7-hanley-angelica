@@ -16,6 +16,7 @@ var lineBreak2 = document.createElement('br')
 
 form.onsubmit = function(e){
     e.preventDefault()
+    weatherSection.innerHTML = ""
     var searchTerm = this.search.value.trim()
     if(!searchTerm) return
     form.search.value=""
