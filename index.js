@@ -13,7 +13,6 @@ var perceivedTemp = document.createElement('p')
 var lastUpdate = document.createElement('p')
 var lineBreak = document.createElement('br')
 var lineBreak2 = document.createElement('br')
-var weatherSection2 = document.createElement('section')
 
 form.onsubmit = function(e){
     e.preventDefault()
@@ -31,8 +30,7 @@ form.onsubmit = function(e){
     })
     .then(function(weatherData){
         console.log(weatherData)
-       
-        weatherDiv.insertBefore(weatherSection, form)
+    
         //Weather Display
         weatherSection.appendChild(cityCountry)
         cityCountry.textContent = weatherData.name + ", " + weatherData.sys.country
@@ -43,7 +41,8 @@ form.onsubmit = function(e){
         mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lon
         mapLink.href = mapsUrl
         mapLink.textContent = "Click to view map"
-        mapLink.target = "__BLANK"
+        //mapLink.target = "__BLANK"
+        mapLink.target = "_blank"
         //image
         weatherSection.appendChild(weatherImage)
         imageLink = "https://openweathermap.org/img/wn/" +weatherData.weather[0].icon + "@2x.png"
