@@ -7,6 +7,12 @@ var form = document.querySelector('form')
 var cityCountry = document.createElement('h2')
 var mapLink = document.createElement('a')
 var weatherImage = document.createElement('img')
+var description = document.createElement('p')
+var actualTemp = document.createElement('p')
+var perceivedTemp = document.createElement('p')
+var lastUpdate = document.createElement('p')
+var lineBreak = document.createElement('br')
+var lineBreak2 = document.createElement('br')
 
 
 
@@ -43,6 +49,23 @@ form.onsubmit = function(e){
         weatherSection.appendChild(weatherImage)
         imageLink = "https://openweathermap.org/img/wn/" +weatherData.weather[0].icon + "@2x.png"
         weatherImage.src = imageLink
+
+        //paragraph elements
+        weatherSection.appendChild(description)
+        weatherSection.appendChild(actualTemp)
+        weatherSection.appendChild(perceivedTemp)
+        weatherSection.appendChild(lastUpdate)
+
+        description.textContent = weatherData.weather[0].description
+        description.style.textTransform = "capitalize"
+        weatherSection.appendChild(lineBreak)
+        actualTemp.textContent = "Current: " + weatherData.main.temp +"° F"
+        perceivedTemp.textContent = "Feels like: " + weatherData.main.feels_like +"° F"
+        weatherSection.appendChild(lineBreak2)
+
+
+
+   
     })
     .catch(function(err){
         weatherDiv.appendChild(weatherSection)
