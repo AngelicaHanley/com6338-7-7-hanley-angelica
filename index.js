@@ -13,8 +13,7 @@ var perceivedTemp = document.createElement('p')
 var lastUpdate = document.createElement('p')
 var lineBreak = document.createElement('br')
 var lineBreak2 = document.createElement('br')
-
-
+var weatherSection2 = document.createElement('section')
 
 form.onsubmit = function(e){
     e.preventDefault()
@@ -49,12 +48,10 @@ form.onsubmit = function(e){
         weatherSection.appendChild(weatherImage)
         imageLink = "https://openweathermap.org/img/wn/" +weatherData.weather[0].icon + "@2x.png"
         weatherImage.src = imageLink
-
-        //paragraph elements
+        //description and temps
         weatherSection.appendChild(description)
         weatherSection.appendChild(actualTemp)
         weatherSection.appendChild(perceivedTemp)
-        weatherSection.appendChild(lastUpdate)
 
         description.textContent = weatherData.weather[0].description
         description.style.textTransform = "capitalize"
@@ -62,13 +59,18 @@ form.onsubmit = function(e){
         actualTemp.textContent = "Current: " + weatherData.main.temp +"° F"
         perceivedTemp.textContent = "Feels like: " + weatherData.main.feels_like +"° F"
         weatherSection.appendChild(lineBreak2)
-
-
-
+        //time
+        weatherSection.appendChild(lastUpdate)
+        var date = new Date(weatherData.dt * 1000)
+        var timeString = date.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit'
+        })
+        lastUpdate.textContent= "Last updated: "+ timeString
    
     })
     .catch(function(err){
-        weatherDiv.appendChild(weatherSection)
+        weatherSection.innerHTML = ""
         weatherSection.appendChild(cityCountry)
         cityCountry.textContent = err.message
     })
